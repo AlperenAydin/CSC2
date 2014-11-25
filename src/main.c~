@@ -1,0 +1,18 @@
+
+#include "piece_siam.h"
+#include "plateau_siam.h"
+#include "jeu_siam.h"
+#include "api_siam.h"
+#include "mode_interactif.h"
+
+#include <stdio.h>
+
+int main()
+{
+  type_piece type=rhinoceros;
+  printf( "%d\n",type);
+  int  est_ce_un_elephant = (type==elephant );
+  int est_ce_un_rocher = (type==rocher);
+  printf( "%d %d\n" ,est_ce_un_elephant,est_ce_un_rocher);
+  return 0;
+}
