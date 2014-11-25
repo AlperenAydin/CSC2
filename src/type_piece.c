@@ -126,15 +126,15 @@ void test_type_etre_animal()
       printf("valeur %d KO \n",k);
 }
 
-void test_type_correspond_caractere_animal()
+void test_type_correspondre_caractere_animal()
 {
 
     puts("Test type_correspond_caractere_animal");
 
-    if(type_correspond_caractere_animal('e') != elephant)
+    if(type_correspondre_caractere_animal('e') != elephant)
       puts("e K0!!!!");
 
-    if(type_correspond_caractere_animal('r') != rhinoceros)
+    if(type_correspondre_caractere_animal('r') != rhinoceros)
       puts("r K0!!!!");
 
 }

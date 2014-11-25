@@ -21,7 +21,7 @@ int orientation_etre_integre_deplacement(orientation_deplacement direction_depla
  // L'enumeration designe un deplacement integre si il  est compris entre 0 et 4.
     // Une enumeration etant un type non signee, il est forcement positif.
     // Il suffit donc que type soit < 4 pour designer un type valide.
-  if(orientations_deplacement<4)
+  if(direction_deplacement<4)
     return 1;
   else
     return 0;
@@ -156,19 +156,19 @@ void test_orientation_etre_integre_deplacement()
   //Si il n'y a pas de déplacement la fonction retourne 0
   puts("Test orientation_etre_integre_deplacement ");
 
-  if(orientation_etre_integre_deplacemen(haut) !=1)
+  if(orientation_etre_integre_deplacement(haut) !=1)
     puts("haut KO");
 
-  if(orientation_etre_integre_deplacemen(bas) !=1)
+  if(orientation_etre_integre_deplacement(bas) !=1)
     puts("bas KO");
 
-  if(orientation_etre_integre_deplacemen(droite) !=1)
+  if(orientation_etre_integre_deplacement(droite) !=1)
     puts("droite KO");
 
-  if(orientation_etre_integre_deplacemen(gauche) !=1)
+  if(orientation_etre_integre_deplacement(gauche) !=1)
     puts("gauche KO");
 
-  if(orientation_etre_integre_deplacemen(aucune_orientation) != 0)
+  if(orientation_etre_integre_deplacement(aucune_orientation) != 0)
     puts("aucune_orientation KO");
 
   int k= 0;
@@ -188,7 +188,7 @@ void test_orientation_correspondre_caractere()
     // On place les différents caractères dans un tableau de caractère
     // afin de pouvoir les comparer plus aisément dans notre boucle for
     char liste[5] = "^v<>";
-    int i = 0;
+    unsigned int i = 0;
     for(i=0; i<4; i++)
       if(orientation_correspondre_caractere(liste[i]) != i)
 	printf("%c KO. \n",liste[i]);

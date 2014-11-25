@@ -199,4 +199,6 @@ void test_orientation_etre_integre_deplacement();
 
 /*Teste le bon fonctionnement du ' orientation_correspondre_caractere' */
 void test_orientation_correspondre_caractere();
+
+
 #endif

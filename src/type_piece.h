@@ -181,7 +181,7 @@ void test_type_etre_animal();
  *      - Affiche KO lors d'un bug.
  *      - Affiche OK sinon
  */
-void test_type_correspond_caractere_animal();
+void test_type_correspondre_caractere_animal();
 
 
 
