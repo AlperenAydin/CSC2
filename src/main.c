@@ -11,8 +11,9 @@
 void test_lancer()
 {
 test_type_etre_animal();
-//puis tous les autres tests a ajouter
-//de maniere iterative ...
+test_type_correspond_caractere_animal(); 
+test_orientation_correspondre_caractere();
+test_orientation_etre_integre_deplacement();
 }
 
 
