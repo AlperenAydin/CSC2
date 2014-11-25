@@ -132,7 +132,7 @@ orientation_deplacement orientation_correspondre_caractere(char orientation)
       deplacement = gauche;
 
     case '>': 
-      deplacement = droit;
+      deplacement = droite;
 
     case '^': 
       deplacement = haut;
@@ -142,4 +142,55 @@ orientation_deplacement orientation_correspondre_caractere(char orientation)
     }
  
   return deplacement;
+}
+
+/***********************************************************************************
+ *        Les Tests
+ ***********************************************************************************/
+
+
+void test_orientation_etre_integre_deplacement()
+{
+
+  //On teste pour chaque valeur associée au 4 déplacements que la fonction retourne 1
+  //Si il n'y a pas de déplacement la fonction retourne 0
+  puts("Test orientation_etre_integre_deplacement ");
+
+  if(orientation_etre_integre_deplacemen(haut) !=1)
+    puts("haut KO");
+
+  if(orientation_etre_integre_deplacemen(bas) !=1)
+    puts("bas KO");
+
+  if(orientation_etre_integre_deplacemen(droite) !=1)
+    puts("droite KO");
+
+  if(orientation_etre_integre_deplacemen(gauche) !=1)
+    puts("gauche KO");
+
+  if(orientation_etre_integre_deplacemen(aucune_orientation) != 0)
+    puts("aucune_orientation KO");
+
+  int k= 0;
+  // On teste pour les non deplacements
+  for(k=5;k<20;++k)
+    if(orientation_etre_integre_deplacement(k)!=0)
+      printf("valeur %d KO \n",k);
+}
+
+
+
+void test_orientation_correspondre_caractere()
+{
+
+    puts("Test orientation_correspondre_caractere ");
+
+    // On place les différents caractères dans un tableau de caractère
+    // afin de pouvoir les comparer plus aisément dans notre boucle for
+    char liste[5] = "^v<>";
+    int i = 0;
+    for(i=0; i<4; i++)
+      if(orientation_correspondre_caractere(liste[i]) != i)
+	printf("%c KO. \n",liste[i]);
+
 }

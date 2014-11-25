@@ -189,6 +189,14 @@ int orientation_caractere_etre_integre(char orientation);
  */
 orientation_deplacement orientation_correspondre_caractere(char orientation);
 
+/******************************************************************************
+ * Les Tests
+ ******************************************************************************/
 
 
+/*Teste le bon fonctionnement du 'orientation_etre_integre_deplacement' */
+void test_orientation_etre_integre_deplacement();
+
+/*Teste le bon fonctionnement du ' orientation_correspondre_caractere' */
+void test_orientation_correspondre_caractere();
 #endif
