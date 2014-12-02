@@ -151,7 +151,20 @@ int piece_etre_case_vide(const piece_siam* piece);
 void piece_definir(piece_siam* piece,type_piece type,orientation_deplacement orientation);
 
 /**
- * Documentation a ecrire
+ * **
+ * Fonction piece_definir_rocher:
+ * *************************
+ *    Definie les elements d'une piece de type rocher directement a l'aide d'un
+ *      type et d'une orientation.
+ *
+ *    Necessite:
+ *      - Un pointeur non NULL vers une piece_siam modifiable.
+ *      - Un type integre.
+ *      - Une orientation integre.
+ *    Garantie:
+ *      - Une piece de type rocher mise a jour avec pour type le type rocher et dont le champ orientation est toujours défini à "aucun orientation".
+ *      - La piece doit etre integre.
+ */
  */
 void piece_definir_rocher(piece_siam* piece);
 
@@ -231,6 +244,48 @@ piece_siam piece_correspondre_nom_cours(const char* nom_cours);
 // La test de piece_etre_integre
 // Nous allons tester tous les pieces valides possible 
 void test_piece_etre_integre();
+
+// Ci-contre l'en tête du test de la fonction piece_etre_animal
+//Nous allons vérifier qu'elle fonctionne bien en testant les différents cas possibles c'est à dire pour les 4 types possibles de pièces
+void test_piece_etre_animal();
+
+// Ci-contre l'en tête du test de la fonction piece_etre_rocher
+//Nous allons vérifier qu'elle fonctionne bien en testant les différents cas possibles c'est à dire pour les 4 types possibles de pièces
+void test_piece_etre_rocher();
+
+// Ci-contre l'en tête du test de la fonction piece_etre_case_vide
+//Nous allons vérifier qu'elle fonctionne bien en testant les différents cas possibles c'est à dire pour les 4 types possibles de pièces
+void test_piece_etre_case_vide();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+>>>>>>> 11d39a45f27ed709cb2657aa8215049f9aaa4191
 
 
 #endif
