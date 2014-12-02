@@ -16,16 +16,18 @@ int piece_etre_integre(const piece_siam* piece)
   // Il est valide
   if(type_etre_animal(piece->type) == 1) 
     {
-      if(orientation_etre_integre_deplacement(type ->orientation) == 1)
+      if(orientation_etre_integre_deplacement(piece ->orientation) == 1)
 	return 1;
     }
   //Si piece n'est pas un animal et aucune deplacement
   //Il est valide
   else
     {
-      if(orientation_etre_integre_deplacement(type ->orientation) == 0)
+      if(orientation_etre_integre_deplacement(piece ->orientation) == 0)
 	return 1;
     }
+
+  return 0;
 }
 
 void piece_initialiser(piece_siam* piece)
@@ -164,9 +166,9 @@ piece_siam piece_correspondre_nom_cours(const char* nom_cours)
 
 void test_piece_etre_integre()
 {
-  piece* test        = malloc(sizeof(piece)) ; // Allocation dynamique de notre piece de test
-  test -> type       = elephant;
-  test ->orientation = haut;
+  piece_siam* piece  = malloc(sizeof(piece_siam)) ; // Allocation dynamique de notre piece de test
+  piece -> type       = elephant;
+  piece ->orientation = haut;
 
   char* nom_type        = NULL;
   char* nom_orientation = NULL;
@@ -179,17 +181,21 @@ void test_piece_etre_integre()
       piece->orientation = haut;
       for (j=0; j<5; j++ )
 	{
-	  nom_type       = type_nommer (piece->type);
-	  nom_orientaion = orientation_nommer (piece->orienatation);
+	 
 	  if(piece_etre_integre(piece) == 1)
 	    validite = "valide";
-	  else valide = "pas valide";
+	  else validite = "pas valide";
 
-	  printf("%s vers %s est %s",nom_type,nom_orientation, validite);
+	  nom_type       = type_nommer (piece->type);
+	  nom_orientation = orientation_nommer (piece->orientation);
+
+	  printf("%s vers %s est %s  \n",nom_type,nom_orientation, validite);
 	  
 	  piece->orientation ++; 
 	}
       piece->type ++;
     }
+
+  delete piece;
 
 }
