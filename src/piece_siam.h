@@ -211,7 +211,15 @@ void piece_afficher(const piece_siam* piece);
 void piece_afficher_nom_cours(const piece_siam* piece);
 
 /**
- * Documentation a ecrire
+ * Fonction : piece_correspondre_nom_cours
+ * ***************************************
+ *       Cree une piece decrit par un 
+ *
+ *
+ *    Necessite:
+ *      - Une chaine de caractere de 3 caracteres
+ *    Garantie:
+ *      - Piece doit etre integre
  */
 piece_siam piece_correspondre_nom_cours(const char* nom_cours);
 
