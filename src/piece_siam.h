@@ -209,5 +209,13 @@ void piece_afficher_nom_cours(const piece_siam* piece);
 piece_siam piece_correspondre_nom_cours(const char* nom_cours);
 
 
+/************************************************************************
+ *                               Tests 
+ *************************************************************************/
+
+// La test de piece_etre_integre
+// Nous allons tester tous les pieces valides possible 
+void test_piece_etre_integre();
+
 
 #endif
