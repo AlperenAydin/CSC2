@@ -155,8 +155,15 @@ void piece_definir(piece_siam* piece,type_piece type,orientation_deplacement ori
  */
 void piece_definir_rocher(piece_siam* piece);
 
-/**
- * Documentation a ecrire
+
+/*********
+ *    Definie les elements d'une case vide .
+ *
+ *    Necessite:
+ *      - Un pointeur non NULL vers une piece_siam modifiable.
+ *    Garantie:
+ *      - Une piece mise a jour avec le type case_vide et l'orientation aucune_orientation.
+ *      - La piece doit etre integre.
  */
 void piece_definir_case_vide(piece_siam* piece);
 
