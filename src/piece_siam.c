@@ -22,15 +22,26 @@ void piece_initialiser(piece_siam* piece)
 
 int piece_etre_animal(const piece_siam* piece)
 {
-    return 1;//completer cette fonction
-}
+  assert(piece-!=NULL);
+  if(piece->type<3)
+  {
+   return 1;
+  }
+  else
+  {
+   return 0;
+  }
 
 
 int piece_etre_rocher(const piece_siam* piece)
 {
-    return 1;//completer cette fonction
-}
-
+  assert(piece!=NULL);
+  if(piece->type==2)
+  {
+    return 1;
+   }
+else{return 0;}
+ 
 
 int piece_etre_case_vide(const piece_siam* piece)
 {
