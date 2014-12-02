@@ -40,26 +40,15 @@ void piece_initialiser(piece_siam* piece)
 
 int piece_etre_animal(const piece_siam* piece)
 {
-  assert(piece-!=NULL);
-  if(piece->type<3)
-  {
-   return 1;
-  }
-  else
-  {
-   return 0;
-  }
+    return 1;//completer cette fonction
+}
 
 
 int piece_etre_rocher(const piece_siam* piece)
 {
-  assert(piece!=NULL);
-  if(piece->type==2)
-  {
-    return 1;
-   }
-else{return 0;}
- 
+    return 1;//completer cette fonction
+}
+
 
 int piece_etre_case_vide(const piece_siam* piece)
 {
@@ -196,7 +185,7 @@ void test_piece_etre_integre()
 	    validite = "valide";
 	  else valide = "pas valide";
 
-	  printf("%s vers %s est %s",nom_type,nom_orientation, validite)
+	  printf("%s vers %s est %s",nom_type,nom_orientation, validite);
 	  
 	  piece->orientation ++; 
 	}
