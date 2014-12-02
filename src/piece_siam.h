@@ -151,7 +151,20 @@ int piece_etre_case_vide(const piece_siam* piece);
 void piece_definir(piece_siam* piece,type_piece type,orientation_deplacement orientation);
 
 /**
- * Documentation a ecrire
+ * **
+ * Fonction piece_definir_rocher:
+ * *************************
+ *    Definie les elements d'une piece de type rocher directement a l'aide d'un
+ *      type et d'une orientation.
+ *
+ *    Necessite:
+ *      - Un pointeur non NULL vers une piece_siam modifiable.
+ *      - Un type integre.
+ *      - Une orientation integre.
+ *    Garantie:
+ *      - Une piece de type rocher mise a jour avec pour type le type rocher et dont le champ orientation est toujours défini à "aucun orientation".
+ *      - La piece doit etre integre.
+ */
  */
 void piece_definir_rocher(piece_siam* piece);
 
