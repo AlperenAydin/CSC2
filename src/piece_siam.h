@@ -227,8 +227,16 @@ piece_siam piece_correspondre_nom_cours(const char* nom_cours);
 ************************************************************************************************************************/
 
 // Ci-contre l'en tête du test de la fonction piece_etre_animal
-//Nous allons vérifier qu'elle fonctionne bien en testant les différents cas possibles
+//Nous allons vérifier qu'elle fonctionne bien en testant les différents cas possibles c'est à dire pour les 4 types possibles de pièces
 void test_piece_etre_animal()
+
+// Ci-contre l'en tête du test de la fonction piece_etre_rocher
+//Nous allons vérifier qu'elle fonctionne bien en testant les différents cas possibles c'est à dire pour les 4 types possibles de pièces
+void test_piece_etre_rocher()
+
+// Ci-contre l'en tête du test de la fonction piece_etre_case_vide
+//Nous allons vérifier qu'elle fonctionne bien en testant les différents cas possibles c'est à dire pour les 4 types possibles de pièces
+void test_piece_etre_case_vide()
 
 
 

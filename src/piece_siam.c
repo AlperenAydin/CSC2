@@ -167,13 +167,60 @@ piece->type=elephant;
 int i;
 for(i=1;i<=4;i++)
 {
-if(piece->type <3)
+if(piece_etre_integre(piece)==1)
+{
+ if(piece->type <3)
  {
   if(piece_etre_animal(piece)==1)
    {printf("Test ok")}
   else{printf("Test ko")}
+}
+}
  piece++;
 }
+}
+
+void test_piece_etre_rocher()
+{ 
+piece_siam* piece;
+piece->type=elephant;
+int i;
+for(i=1;i<=4;i++)
+{
+if(piece_etre_integre(piece)==1)
+{
+  if(piece->type=3)
+ {
+  if(piece_etre_rocher(piece)==1)
+   {printf("Test ok")}
+  else{printf("Test ko")}
+}
+}
+ piece++;
+}
+}
+
+void test_piece_etre_cas_vide()
+{ 
+piece_siam* piece;
+piece->type=elephant;
+int i;
+for(i=1;i<=4;i++)
+{
+if(piece_etre_integre(piece)==1)
+{
+if(piece->type=4)
+ {
+  if(piece_etre_case_vide(piece)==1)
+   {printf("Test ok")}
+  else{printf("Test ko")}
+ }
+ }
+ piece++;
+}
+}
+
+
 
 
 
