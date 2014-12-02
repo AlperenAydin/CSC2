@@ -170,6 +170,7 @@ void test_piece_etre_integre()
 
   char* nom_type        = NULL;
   char* nom_orientation = NULL;
+  char* validite        = NULL;
   
   int i=0;
   int j=0;
@@ -180,8 +181,15 @@ void test_piece_etre_integre()
 	{
 	  nom_type       = type_nommer (piece->type);
 	  nom_orientaion = orientation_nommer (piece->orienatation);
+	  if(piece_etre_integre(piece) == 1)
+	    validite = "valide";
+	  else valide = "pas valide";
+
+	  printf("%s vers %s est %s",nom_type,nom_orientation, validite)
 	  
+	  piece->orientation ++; 
 	}
+      piece->type ++;
     }
 
 }
