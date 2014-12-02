@@ -196,6 +196,6 @@ void test_piece_etre_integre()
       piece->type ++;
     }
 
-  delete piece;
+  free(piece);
 
 }

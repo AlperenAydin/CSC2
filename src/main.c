@@ -17,10 +17,19 @@ void test_lancer()
   test_piece_etre_integre ();
 }
 
+void fonction()
+{
+  int a = 12 ;
+  int *pointeur;
+  pointeur=&a;
+  printf("%d\n",*pointeur);
+}
+
 
 int main()
 {
 
   test_lancer();
+  fonction();
   return 0 ;
 }
