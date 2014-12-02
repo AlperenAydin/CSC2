@@ -222,5 +222,42 @@ void piece_afficher_nom_cours(const piece_siam* piece);
 piece_siam piece_correspondre_nom_cours(const char* nom_cours);
 
 
+/***********************************************************************************************************************
+***                             Fonctions Tests
+************************************************************************************************************************/
+
+// Ci-contre l'en tête du test de la fonction piece_etre_animal
+//Nous allons vérifier qu'elle fonctionne bien en testant les différents cas possibles
+void test_piece_etre_animal()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 #endif

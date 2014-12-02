@@ -154,3 +154,34 @@ piece_siam piece_correspondre_nom_cours(const char* nom_cours)
     return piece;
 
 }
+
+/***************************************************************************************************************************
+*                                 TEST DES FONCTIONS
+***************************************************************************************************************/
+
+
+void test_piece_etre_animal()
+{ 
+piece_siam* piece;
+piece->type=elephant;
+int i;
+for(i=1;i<=4;i++)
+{
+if(piece->type <3)
+ {
+  if(piece_etre_animal(piece)==1)
+   {printf("Test ok")}
+  else{printf("Test ko")}
+ piece++;
+}
+
+
+
+
+
+
+
+
+
+
+
