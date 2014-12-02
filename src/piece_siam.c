@@ -7,7 +7,25 @@
 
 int piece_etre_integre(const piece_siam* piece)
 {
-    return 1; // modifier cette fonction
+  assert (piece!= NULL); // On verifie que le pointeur est valide
+  //On verifie que on a des types valides
+  assert (type_etre_integre        (piece -> type)        == 1);
+  assert (orientation_etre_integre (piece -> orientation) == 1);
+
+  // Si piece est un animal et possede un deplacement comme orientation
+  // Il est valide
+  if(type_etre_animal(piece->type) == 1) 
+    {
+      if(orientation_etre_integre_deplacement(type ->orientation) == 1)
+	return 1;
+    }
+  //Si piece n'est pas un animal et aucune deplacement
+  //Il est valide
+  else
+    {
+      if(orientation_etre_integre_deplacement(type ->orientation) == 0)
+	return 1;
+    }
 }
 
 void piece_initialiser(piece_siam* piece)
@@ -147,5 +165,34 @@ piece_siam piece_correspondre_nom_cours(const char* nom_cours)
     }
 
     return piece;
+
+}
+
+
+/************************************************************************
+ *                               Tests 
+ *************************************************************************/
+
+void test_piece_etre_integre()
+{
+  piece* test        = malloc(sizeof(piece)) ; // Allocation dynamique de notre piece de test
+  test -> type       = elephant;
+  test ->orientation = haut;
+
+  char* nom_type        = NULL;
+  char* nom_orientation = NULL;
+  
+  int i=0;
+  int j=0;
+  for (i=0; i<4; i++)
+    {
+      piece->orientation = haut;
+      for (j=0; j<5; j++ )
+	{
+	  nom_type       = type_nommer (piece->type);
+	  nom_orientaion = orientation_nommer (piece->orienatation);
+	  
+	}
+    }
 
 }
