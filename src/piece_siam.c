@@ -62,7 +62,7 @@ int piece_etre_case_vide(const piece_siam* piece)
 
 void piece_definir(piece_siam* piece,type_piece type,orientation_deplacement orientation)
 {
-    //fonction a completer
+  assert (piece != NULL);
     piece->type=type;
     piece->orientation=orientation;
 }
