@@ -70,7 +70,7 @@
  *    Verifie si il est possible d'introduire une piece sur le
  *     plateau.
  *    L'introduction est possible si:
- *     - les coordonnees designent une piece modifiable par le joueur courant.
+ *     - les coordonnees designent une piece modifiable.
  *     - l'introduction de la piece designee dans la direction donnee est
  *        permise par les regles du jeu (poussee comprise).
  *

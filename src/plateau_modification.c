@@ -23,11 +23,11 @@ int plateau_modification_introduire_piece_etre_possible(const plateau_siam* plat
   //    * L'orientation doit etre un deplacement
   //  Sinon renvoie 0
 
-  if(coordonnees_etre_dans_plateau(x0,y0)==0)
+  if(coordonnees_etre_dans_plateau(x,y)==0)
     return 0;
   if(orientation_etre_integre_deplacement(orientation)==0)
     return 0;
-  if(plateau_exister_piece(plateau,x0,y0)==1)
+  if(plateau_exister_piece(plateau,x,y)==1)
     return 0;
 
   //verification de condition; 
@@ -45,15 +45,15 @@ void plateau_modification_introduire_piece(plateau_siam* plateau,
 {
   //preconditions
   assert(plateau!=NULL);
-  assert(coordonnees_etre_dans_plateau(x0,y0));
-  assert(plateau_exister_piece(plateau,x0,y0)==1);
+  assert(coordonnees_etre_dans_plateau(x,y));
+  assert(plateau_exister_piece(plateau,x,y)==1);
   assert(orientation_etre_integre_deplacement(orientation));
 
-  assert(plateau_modification_introduire_piece_etre_possible(plateau,x0,y0,type,orientation));
+  assert(plateau_modification_introduire_piece_etre_possible(plateau,x,y,type,orientation));
 
   //changement d'orientation
-  piece_siam* piece  = plateau_obtenir_piece(plateau,x0,y0);
-  piece->type_piece  = type ;
+  piece_siam* piece  = plateau_obtenir_piece(plateau,x,y);
+  piece->type         = type ;
   piece->orientation = orientation ; 
 
 
@@ -66,7 +66,7 @@ void plateau_modification_introduire_piece(plateau_siam* plateau,
 
 
 
-int plateau_modification_changer_orientation_piece_etre_possible(const plateau_siam* plateau,int x0,int y0,orientation_deplacement orientation)
+int plateau_modification_changer_orientation_piece_etre_possible(plateau_siam* plateau,int x0,int y0,orientation_deplacement orientation)
 {
   assert(plateau!=NULL);
 
@@ -129,7 +129,6 @@ int plateau_modification_deplacer_piece_etre_possible(const plateau_siam* platea
 {
   assert(plateau != NULL);
 
-  int valide =1;
   //Algorithme:
   //
   //  Verification conditions necessaires:
@@ -152,7 +151,7 @@ int plateau_modification_deplacer_piece_etre_possible(const plateau_siam* platea
   //Deplacement vers case vide:
 
   int x=x0, y=y0;
-  coordonnes_appliquer_deplacement(&x,&y,direction_deplacement);
+  coordonnees_appliquer_deplacement(&x,&y,direction_deplacement);
 
   if(coordonnees_etre_dans_plateau(x,y)==1)// On est dans le plateau
     {
@@ -177,23 +176,24 @@ void plateau_modification_deplacer_piece(plateau_siam* plateau,
   assert(plateau!=NULL);
   assert(coordonnees_etre_dans_plateau(x0,y0));
   assert(plateau_exister_piece(plateau,x0,y0)==1);
-  assert(orientation_etre_integre_deplacement(orientation));
+  assert(orientation_etre_integre_deplacement(orientation_final));
+  assert(orientation_etre_integre_deplacement(direction_deplacement));
 
-  assert(plateau_modification_deplacer_piece_etre_possible(plateau,x0,y0,direction_deplacement,orientation));
+  assert(plateau_modification_deplacer_piece_etre_possible(plateau,x0,y0,direction_deplacement,orientation_final));
 
   //changement d'orientation
   piece_siam* piece  = plateau_obtenir_piece(plateau,x0,y0);
   int x=x0,y=y0;
-  coordonnes_appliquer_deplacement(&x,&y,direction_deplacement);
+  coordonnees_appliquer_deplacement(&x,&y,direction_deplacement);
   
   if(coordonnees_etre_dans_plateau(x,y)) // Si on reste dans le plateau , on met une piece.
     {
       piece_siam* piece_nou  = plateau_obtenir_piece(plateau,x,y);
-      piece_nou->type_pice   = piece->type_piece;
+      piece_nou->type        = piece->type;
       piece_nou->orientation = orientation_final; 
     } 
   //Dans le tout les cas, on vide l'ancienne case
-  piece ->type_piece  = case_vide;
+  piece ->type        = case_vide;
   piece ->orientation = aucune_orientation;
 
   /*Pour le moment on touche pas le condition victoire*/

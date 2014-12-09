@@ -42,6 +42,40 @@ void plateau_initialiser(plateau_siam* plateau)
     assert(plateau_etre_integre);
 }
 
+
+int plateau_denombrer_type(const plateau_siam* plateau,type_piece type)
+{
+  assert(plateau!=NULL);
+
+
+  // Algorithme:
+  //
+  //  Initialiser compteur <- 0
+  //  Pour toutes les cases du tableau
+  //     Si case courante est du type souhaite
+  //        Incremente compteur
+  //  Renvoie compteur
+
+
+  int compteur=0;
+  int kx=0;
+
+  for(kx=0;kx<NBR_CASES;++kx)
+    {
+      int ky=0;
+      for(ky=0;ky<NBR_CASES;++ky)
+        {
+	  const piece_siam* piece=plateau_obtenir_piece_info(plateau,kx,ky);
+	  assert(piece!=NULL);
+
+	  if(piece->type==type)
+	    compteur++;
+        }
+    }
+
+  return compteur;
+}
+
 int plateau_etre_integre(const plateau_siam* plateau)
 {
   assert(plateau!=NULL);
@@ -103,40 +137,6 @@ const piece_siam* plateau_obtenir_piece_info(const plateau_siam* plateau,int x,i
     const piece_siam* piece=&(plateau->piece[x][y]);
 
     return piece;
-}
-
-
-int plateau_denomber_type(const plateau_siam* plateau,type_piece type)
-{
-  assert(plateau!=NULL);
-
-
-  // Algorithme:
-  //
-  //  Initialiser compteur <- 0
-  //  Pour toutes les cases du tableau
-  //     Si case courante est du type souhaite
-  //        Incremente compteur
-  //  Renvoie compteur
-
-
-  int compteur=0;
-  int kx=0;
-
-  for(kx=0;kx<NBR_CASES;++kx)
-    {
-      int ky=0;
-      for(ky=0;ky<NBR_CASES;++ky)
-        {
-	  const piece_siam* piece=plateau_obtenir_piece_info(plateau,kx,ky);
-	  assert(piece!=NULL);
-
-	  if(piece->type==type)
-	    compteur++;
-        }
-    }
-
-  return compteur;
 }
 
 int plateau_exister_piece(const plateau_siam* plateau,int x,int y)
