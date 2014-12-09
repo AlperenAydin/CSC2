@@ -224,5 +224,20 @@ const piece_siam* plateau_obtenir_piece_info(const plateau_siam* plateau,int x,i
  */
 void plateau_afficher(const plateau_siam* plateau);
 
+int plateau_denomber_type(const plateau_siam* plateau,type_piece type);
+
+int plateau_exister_piece(const plateau_siam* plateau,int x,int y);
+
+int jeu_verifier_type_piece_a_modifier(const jeu_siam* jeu,int x,int y);
+
+type_piece jeu_obtenir_type_animal_courant(const jeu_siam* jeu);
+
+int plateau_modification_changer_orientation_piece_etre_possible(const plateau_siam* plateau,int x0,int y0,orientation_deplacement orientation);
+
+void plateau_modification_changer_orientation_piece(plateau_siam* plateau,int x0,int y0,orientation_deplacement orientation);
+
+
+
+
 
 #endif

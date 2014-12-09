@@ -44,7 +44,45 @@ void plateau_initialiser(plateau_siam* plateau)
 
 int plateau_etre_integre(const plateau_siam* plateau)
 {
-    return 1; //coder cette fonction
+  assert(plateau!=NULL);
+
+
+  // Verification de l'integrite en 4 etapes:
+  //  1. Verification que l'ensemble des pieces du plateau
+  //     sont integres.
+  //  2. Verification du nombre d'elephants.
+  //  3. Verification du nombre de rhinoceros.
+  //  4. Verification du nombre de rochers.
+
+
+  int kx=0;
+  for(kx=0;kx<NBR_CASES;++kx)
+    {
+      int ky=0;
+      for(ky=0;ky<NBR_CASES;++ky)
+        {
+	  const piece_siam* piece=plateau_obtenir_piece_info(plateau,kx,ky);
+	  assert(piece!=NULL);
+
+	  if(piece_etre_integre(piece)==0)
+	    return 0;
+        }
+    }
+
+  int nbr_elephant=plateau_denombrer_type(plateau,elephant);
+  int nbr_rhino=plateau_denombrer_type(plateau,rhinoceros);
+  int nbr_rocher=plateau_denombrer_type(plateau,rocher);
+
+  if(nbr_elephant<0 || nbr_elephant>NBR_ANIMAUX)
+    return 0;
+  if(nbr_rhino<0 || nbr_rhino>NBR_ANIMAUX)
+    return 0;
+  if(nbr_rocher<0 || nbr_rocher>NBR_ROCHERS)
+    return 0;
+
+
+
+  return 1;
 }
 
 piece_siam* plateau_obtenir_piece(plateau_siam* plateau,int x,int y)
@@ -70,32 +108,139 @@ const piece_siam* plateau_obtenir_piece_info(const plateau_siam* plateau,int x,i
 
 int plateau_denomber_type(const plateau_siam* plateau,type_piece type)
 {
-    int i=0;
-    int j=0;
-    int x=0;
-    for(i=0;i<5;++i)
+  assert(plateau!=NULL);
+
+
+  // Algorithme:
+  //
+  //  Initialiser compteur <- 0
+  //  Pour toutes les cases du tableau
+  //     Si case courante est du type souhaite
+  //        Incremente compteur
+  //  Renvoie compteur
+
+
+  int compteur=0;
+  int kx=0;
+
+  for(kx=0;kx<NBR_CASES;++kx)
     {
-        for(j=0;j<5;++j)
+      int ky=0;
+      for(ky=0;ky<NBR_CASES;++ky)
         {
-            if(plateau->piece[i][j].type==type)
-                x++;
+	  const piece_siam* piece=plateau_obtenir_piece_info(plateau,kx,ky);
+	  assert(piece!=NULL);
+
+	  if(piece->type==type)
+	    compteur++;
         }
     }
-    return x;
+
+  return compteur;
 }
 
 int plateau_exister_piece(const plateau_siam* plateau,int x,int y)
 {
-    return 1; //coder cette fonction
+  assert(plateau!=NULL);
+  assert(coordonnees_etre_dans_plateau(x,y));
+
+  const piece_siam* piece=plateau_obtenir_piece_info(plateau,x,y);
+  assert(piece!=NULL);
+
+  if(piece->type!=case_vide)
+    return 1;
+  return 0;
 }
 
 void plateau_afficher(const plateau_siam* plateau)
 {
-    assert(plateau!=NULL);
+  assert(plateau!=NULL);
 
-    //utilisation d'une fonction generique d'affichage
-    // le parametre stdout permet d'indiquer que l'affichage
-    // est realise sur la ligne de commande par defaut.
-    entree_sortie_ecrire_plateau_pointeur_fichier(stdout,plateau);
+  //utilisation d'une fonction generique d'affichage
+  // le parametre stdout permet d'indiquer que l'affichage
+  // est realise sur la ligne de commande par defaut.
+  entree_sortie_ecrire_plateau_pointeur_fichier(stdout,plateau);
 
 }
+
+int jeu_verifier_type_piece_a_modifier(const jeu_siam* jeu,int x,int y)
+{
+  assert(jeu!=NULL);
+  assert(jeu_etre_integre(jeu));
+  assert(coordonnees_etre_dans_plateau(x,y));
+
+  const plateau_siam* plateau=&jeu->plateau;
+  const piece_siam* piece=plateau_obtenir_piece_info(plateau,x,y);
+  assert(piece!=NULL);
+
+  if(piece_etre_animal(piece))
+    return joueur_etre_type_animal(jeu->joueur,piece->type);
+  else
+    return 0;
+
+}
+
+type_piece jeu_obtenir_type_animal_courant(const jeu_siam* jeu)
+{
+  assert(jeu!=NULL);
+  assert(joueur_etre_integre(jeu->joueur));
+
+  return joueur_obtenir_animal(jeu->joueur);
+}
+
+
+
+int plateau_modification_changer_orientation_piece_etre_possible(const plateau_siam* plateau,int x0,int y0,orientation_deplacement orientation)
+{
+  assert(plateau!=NULL);
+
+  //Algorithme:
+  //
+  // 1- Verification conditions necessaires:
+  //    * Coordonnees doivent etre dans le plateau
+  //    * Coordonnees doivent designer une piece
+  //    * L'orientation doit etre un deplacement
+  //  Sinon renvoie 0
+  //
+  // 2- Verification du changement d'orientation:
+  //    Si orientation actuelle differente de l'orientation souhaitee
+  //      Alors renvoie 1
+  //    Sinon renvoie 0
+  //
+
+  if(coordonnees_etre_dans_plateau(x0,y0)==0)
+    return 0;
+  if(orientation_etre_integre_deplacement(orientation)==0)
+    return 0;
+  if(plateau_exister_piece(plateau,x0,y0)==0)
+    return 0;
+
+  //verification orientation differente
+  const piece_siam* piece=plateau_obtenir_piece_info(plateau,x0,y0);
+  if(piece->orientation==orientation)
+    return 0;
+
+  return 1;
+}
+
+
+void plateau_modification_changer_orientation_piece(plateau_siam* plateau,int x0,int y0,orientation_deplacement orientation)
+{
+  //preconditions
+  assert(plateau!=NULL);
+  assert(coordonnees_etre_dans_plateau(x0,y0));
+  assert(plateau_exister_piece(plateau,x0,y0)==1);
+  assert(orientation_etre_integre_deplacement(orientation));
+
+  assert(plateau_modification_changer_orientation_piece_etre_possible(plateau,x0,y0,orientation));
+
+  //changement d'orientation
+  piece_siam* piece=plateau_obtenir_piece(plateau,x0,y0);
+  piece->orientation=orientation;
+
+  //Post conditions
+  assert(piece_etre_animal(piece));
+  assert(plateau_etre_integre(plateau));
+}
+
+

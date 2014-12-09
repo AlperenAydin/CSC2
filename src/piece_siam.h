@@ -165,7 +165,6 @@ void piece_definir(piece_siam* piece,type_piece type,orientation_deplacement ori
  *      - Une piece de type rocher mise a jour avec pour type le type rocher et dont le champ orientation est toujours défini à "aucun orientation".
  *      - La piece doit etre integre.
  */
- */
 void piece_definir_rocher(piece_siam* piece);
 
 
@@ -256,36 +255,5 @@ void test_piece_etre_rocher();
 // Ci-contre l'en tête du test de la fonction piece_etre_case_vide
 //Nous allons vérifier qu'elle fonctionne bien en testant les différents cas possibles c'est à dire pour les 4 types possibles de pièces
 void test_piece_etre_case_vide();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
->>>>>>> 11d39a45f27ed709cb2657aa8215049f9aaa4191
-
 
 #endif

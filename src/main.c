@@ -17,19 +17,15 @@ void test_lancer()
   test_piece_etre_integre ();
 }
 
-void fonction()
-{
-  int a = 12 ;
-  int *pointeur;
-  pointeur=&a;
-  printf("%d\n",*pointeur);
-}
 
 
 int main()
 {
-
-  test_lancer();
-  fonction();
-  return 0 ;
+  plateau_siam plateau;
+  piece_siam p;
+  piece_definir(&p,elephant,haut);
+  plateau.piece[3][1]=p;
+  puts("piece aux coordonnees (x,y)=(3,1):");
+  piece_afficher(&(plateau.piece[3][1]));
+  return 1; 
 }

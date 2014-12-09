@@ -42,7 +42,7 @@ void piece_initialiser(piece_siam* piece)
 
 int piece_etre_animal(const piece_siam* piece)
 {
-  assert(piece-!=NULL);
+  assert(piece!=NULL);
   if(piece->type<3)
     {
       return 1;
@@ -189,12 +189,13 @@ void test_piece_etre_integre()
   piece -> type       = elephant;
   piece ->orientation = haut;
 
-  char* nom_type        = NULL;
-  char* nom_orientation = NULL;
   char* validite        = NULL;
   
   int i=0;
   int j=0;
+
+  //Nous allons tester pour les 20 combinaisons possibles 
+  //et nous afficherons la validite
   for (i=0; i<4; i++)
     {
       piece->orientation = haut;
@@ -205,24 +206,25 @@ void test_piece_etre_integre()
 	    validite = "valide";
 	  else validite = "pas valide";
 
-	  nom_type       = type_nommer (piece->type);
-	  nom_orientation = orientation_nommer (piece->orientation);
-
-	  printf("%s vers %s est %s  \n",nom_type,nom_orientation, validite);
+	  printf("%d vers %d est %s  \n"
+		 ,piece->type
+		 ,piece->orientation
+		 , validite);
 	  
 	  piece->orientation ++; 
 	}
       piece->type ++;
     }
 
-  free(piece);
+  free(piece); // Liberation de l'espace
 
 }
 
 void test_piece_etre_animal()
 { 
-  piece_siam* piece;
-  piece->type=elephant;
+  piece_siam* piece  = malloc(sizeof(piece_siam)) ;
+  piece->type        =elephant;
+  piece->orientation =0;
   int i;
   for(i=1;i<=4;i++)
     {
@@ -231,8 +233,8 @@ void test_piece_etre_animal()
 	  if(piece->type <3)
 	    {
 	      if(piece_etre_animal(piece)==1)
-		{printf("Test ok")}
-	      else{printf("Test ko")}
+		{printf("Test ok");}
+	      else{printf("Test ko");}
 	    }
 	}
       piece++;
@@ -241,18 +243,19 @@ void test_piece_etre_animal()
 
 void test_piece_etre_rocher()
 { 
-  piece_siam* piece;
+  piece_siam* piece= malloc(sizeof(piece_siam)) ;
   piece->type=elephant;
+  piece->orientation =0;
   int i;
   for(i=1;i<=4;i++)
     {
       if(piece_etre_integre(piece)==1)
 	{
-	  if(piece->type=3)
+	  if(piece->type==3)
 	    {
 	      if(piece_etre_rocher(piece)==1)
-		{printf("Test ok")}
-	      else{printf("Test ko")}
+		{printf("Test ok");}
+	      else{printf("Test ko");}
 	    }
 	}
       piece++;
@@ -261,18 +264,19 @@ void test_piece_etre_rocher()
 
 void test_piece_etre_cas_vide()
 { 
-  piece_siam* piece;
+  piece_siam* piece= malloc(sizeof(piece_siam)) ;
   piece->type=elephant;
+  piece->orientation =0;
   int i;
   for(i=1;i<=4;i++)
     {
       if(piece_etre_integre(piece)==1)
 	{
-	  if(piece->type=4)
+	  if(piece->type==4)
 	    {
 	      if(piece_etre_case_vide(piece)==1)
-		{printf("Test ok")}
-	      else{printf("Test ko")}
+		{printf("Test ok");}
+	      else{printf("Test ko");}
 	    }
 	}
       piece++;
