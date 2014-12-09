@@ -163,31 +163,6 @@ void plateau_afficher(const plateau_siam* plateau)
 
 }
 
-int jeu_verifier_type_piece_a_modifier(const jeu_siam* jeu,int x,int y)
-{
-  assert(jeu!=NULL);
-  assert(jeu_etre_integre(jeu));
-  assert(coordonnees_etre_dans_plateau(x,y));
-
-  const plateau_siam* plateau=&jeu->plateau;
-  const piece_siam* piece=plateau_obtenir_piece_info(plateau,x,y);
-  assert(piece!=NULL);
-
-  if(piece_etre_animal(piece))
-    return joueur_etre_type_animal(jeu->joueur,piece->type);
-  else
-    return 0;
-
-}
-
-type_piece jeu_obtenir_type_animal_courant(const jeu_siam* jeu)
-{
-  assert(jeu!=NULL);
-  assert(joueur_etre_integre(jeu->joueur));
-
-  return joueur_obtenir_animal(jeu->joueur);
-}
-
 
 
 int plateau_modification_changer_orientation_piece_etre_possible(const plateau_siam* plateau,int x0,int y0,orientation_deplacement orientation)
