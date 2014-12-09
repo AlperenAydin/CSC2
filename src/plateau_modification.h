@@ -163,8 +163,7 @@ void plateau_modification_changer_orientation_piece(plateau_siam* plateau,int x0
  * *************************
  *    Verifie si il est possible de deplacer une piece sur le plateau.
  *    Le deplacement est possible si:
- *     - les coordonnees designent une piece modifiable par le joueur
- *       courant.
+ *     - les coordonnees designent une piece modifiable.
  *     - la direction de deplacement et la nouvelle orientation est
  *       compatible avec les regles du jeu.
  *
