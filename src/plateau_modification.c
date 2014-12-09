@@ -49,7 +49,7 @@ void plateau_modification_introduire_piece(plateau_siam* plateau,
   assert(plateau_exister_piece(plateau,x0,y0)==1);
   assert(orientation_etre_integre_deplacement(orientation));
 
-  assert(plateau_modification_introduire_piece_etre_possible(plateau,x0,y0,orientation));
+  assert(plateau_modification_introduire_piece_etre_possible(plateau,x0,y0,type,orientation));
 
   //changement d'orientation
   piece_siam* piece  = plateau_obtenir_piece(plateau,x0,y0);
@@ -129,13 +129,14 @@ int plateau_modification_deplacer_piece_etre_possible(const plateau_siam* platea
 {
   assert(plateau != NULL);
 
-
+  int valide =1;
   //Algorithme:
   //
   //  Verification conditions necessaires:
   //    * Coordonnees doivent etre dans le plateau
   //    * Coordonnees doivent designer un animal
   //    * L'orientation doit etre un deplacement
+  //    * On ne peut pas se mettre sur un cas ou il ya deja quelque chose.
   //  Sinon renvoie 0
   if (coordonnees_etre_dans_plateau(x0,y0)==0)
     return 0;
@@ -143,8 +144,26 @@ int plateau_modification_deplacer_piece_etre_possible(const plateau_siam* platea
     return 0;
   if(orientation_etre_integre_deplacement(direction_deplacement)==0)
     return 0;
+  //Verification d'animalite;
   const piece_siam* piece =  plateau_obtenir_piece_info (plateau,x0,y0);
-  
+  if (piece_etre_animal (piece) ==0)
+    return 0;
+
+  //Deplacement vers case vide:
+
+  int x=x0, y=y0;
+  coordonnes_appliquer_deplacement(&x,&y,direction_deplacement);
+
+  if(coordonnees_etre_dans_plateau(x,y)==1)// On est dans le plateau
+    {
+      if(plateau_exister_piece(plateau,x,y)==1)//On essaye de deplcer sur un autre piece (!=case_vide)
+	return 0;
+    }
+
+
+  //on est tout bon
+
+  return 1;
 }
 
 
@@ -154,7 +173,35 @@ void plateau_modification_deplacer_piece(plateau_siam* plateau,
                                          orientation_deplacement orientation_final,
                                          condition_victoire_partie* condition_victoire)
 {
-    //coder cette fonction
+  //preconditions
+  assert(plateau!=NULL);
+  assert(coordonnees_etre_dans_plateau(x0,y0));
+  assert(plateau_exister_piece(plateau,x0,y0)==1);
+  assert(orientation_etre_integre_deplacement(orientation));
+
+  assert(plateau_modification_deplacer_piece_etre_possible(plateau,x0,y0,direction_deplacement,orientation));
+
+  //changement d'orientation
+  piece_siam* piece  = plateau_obtenir_piece(plateau,x0,y0);
+  int x=x0,y=y0;
+  coordonnes_appliquer_deplacement(&x,&y,direction_deplacement);
+  
+  if(coordonnees_etre_dans_plateau(x,y)) // Si on reste dans le plateau , on met une piece.
+    {
+      piece_siam* piece_nou  = plateau_obtenir_piece(plateau,x,y);
+      piece_nou->type_pice   = piece->type_piece;
+      piece_nou->orientation = orientation_final; 
+    } 
+  //Dans le tout les cas, on vide l'ancienne case
+  piece ->type_piece  = case_vide;
+  piece ->orientation = aucune_orientation;
+
+  /*Pour le moment on touche pas le condition victoire*/
+
+  //Post conditions
+  assert(piece_etre_animal(piece));
+  assert(plateau_etre_integre(plateau));
+    
 }
 
 
