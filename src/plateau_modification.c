@@ -135,7 +135,6 @@ int plateau_modification_deplacer_piece_etre_possible(const plateau_siam* platea
   //    * Coordonnees doivent etre dans le plateau
   //    * Coordonnees doivent designer un animal
   //    * L'orientation doit etre un deplacement
-  //    * On ne peut pas se mettre sur un cas ou il ya deja quelque chose.
   //  Sinon renvoie 0
   if (coordonnees_etre_dans_plateau(x0,y0)==0)
     return 0;
@@ -147,17 +146,6 @@ int plateau_modification_deplacer_piece_etre_possible(const plateau_siam* platea
   const piece_siam* piece =  plateau_obtenir_piece_info (plateau,x0,y0);
   if (piece_etre_animal (piece) ==0)
     return 0;
-
-  //Deplacement vers case vide:
-
-  int x=x0, y=y0;
-  coordonnees_appliquer_deplacement(&x,&y,direction_deplacement);
-
-  if(coordonnees_etre_dans_plateau(x,y)==1)// On est dans le plateau
-    {
-      if(plateau_exister_piece(plateau,x,y)==1)//On essaye de deplcer sur un autre piece (!=case_vide)
-	return 0;
-    }
 
 
   //on est tout bon
