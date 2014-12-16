@@ -171,7 +171,8 @@ void plateau_modification_deplacer_piece(plateau_siam* plateau,
   assert(orientation_etre_integre_deplacement(orientation_final));
   assert(orientation_etre_integre_deplacement(direction_deplacement));
 
-  assert(plateau_modification_deplacer_piece_etre_possible(plateau,x0,y0,direction_deplacement,orientation_final));
+  assert(plateau_modification_deplacer_piece_etre_possible(plateau,x0,y0,direction_deplacement,orientation_final) 
+	 &&pousse_etre_valide(plateau,x0,y0,direction_deplacement));
 
   //changement d'orientation
   piece_siam* piece  = plateau_obtenir_piece(plateau,x0,y0);

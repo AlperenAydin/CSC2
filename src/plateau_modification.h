@@ -61,7 +61,7 @@
  */
 #include "plateau_siam.h"
 #include "condition_victoire_partie.h"
-
+#include "poussee.h"
 
 
 /**

@@ -8,26 +8,33 @@
 
 
 int poussee_etre_valide (const plateau_siam* plateau,
-			int x,
-			int y,
-			orientation_deplacement deplacement)
+			 int x,
+			 int y,
+			 orientation_deplacement deplacement)
 {
   assert (plateau!=NULL);
   assert (coordonnees_etre_dans_plateau(x,y)== 1);
   assert (orientation_etre_integre_deplacement(deplacement) ==1);
 
 
-  int puissance_poussee=0;
   //Algorithme:
-  //  Nous allons traverser a long de la directions de la poussee 
+  //  D'abord on verifie que, la piece point vers la bonne direction.
+  // 
+  //  Apres, nous allons traverser a long de la directions de la poussee 
   //  Si on rencontre une animal qui pousse vers deplacement;
   //               On augmente la puissance
   //  sinon, on diminue la puissance
-
+  
+  int puissance_poussee=0;
   int x0 = x;
   int y0 = y;
   const piece_siam* marqueur = NULL;
-while (coordonnees_etre_dans_plateau(x0,y0)== 1 && plateau_exister_piece(plateau,x0,y0))
+
+  marqueur = plateau_obtenir_piece_info (plateau,x0,y0);// L'animal au debut ne pousse pas vers la bonne direction 
+  if(deplacement != marqueur -> orientation)
+    return 0;
+  
+  while (coordonnees_etre_dans_plateau(x0,y0)== 1 && plateau_exister_piece(plateau,x0,y0))
     {
       marqueur = plateau_obtenir_piece_info (plateau,x0,y0);
       if(marqueur ->orientation == deplacement)
@@ -67,7 +74,7 @@ void poussee_realiser (plateau_siam* plateau,
   int x0=x,y0=y;
   int x1=x,y1=y;
 
-if(coordonnees_etre_dans_plateau(x0,y0)==1 && plateau_exister_piece(plateau,x0,y0) )
+  if(coordonnees_etre_dans_plateau(x0,y0)==1 && plateau_exister_piece(plateau,x0,y0) )
     {
       coordonnees_appliquer_deplacement(&x1,&y1,deplacement);
       poussee_realiser(plateau,x1,y1,animal,deplacement,condition_victoire);
