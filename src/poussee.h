@@ -4,6 +4,7 @@
 
 #include "plateau_siam.h"
 #include "condition_victoire_partie.h"
+#include "coordonnees_plateau.h"
 
 
 /***

@@ -1,14 +1,19 @@
 #include "poussee.h"
 
 
+#include <string.h>
+#include <assert.h>
+#include <stdio.h>
+#include <stdlib.h>
 
-int pousse_etre_valide (const plateau_siam* plateau,
+
+int poussee_etre_valide (const plateau_siam* plateau,
 			int x,
 			int y,
 			orientation_deplacement deplacement)
 {
   assert (plateau!=NULL);
-  assert (coordoonees_etre_dans_plateau(x,y)== 1);
+  assert (coordonnees_etre_dans_plateau(x,y)== 1);
   assert (orientation_etre_integre_deplacement(deplacement) ==1);
 
 
@@ -22,17 +27,17 @@ int pousse_etre_valide (const plateau_siam* plateau,
   int x0 = x;
   int y0 = y;
   const piece_siam* marqueur = NULL;
-  while (coordoonees_etre_dans_plateau(x0,y0)== 1 && plateau_exister_piece(x0,y0))
+while (coordonnees_etre_dans_plateau(x0,y0)== 1 && plateau_exister_piece(plateau,x0,y0))
     {
-      marqueur = obtenir_piece_info (plateau,x0,y0);
-      if(marquer ->orientation == deplacement)
+      marqueur = plateau_obtenir_piece_info (plateau,x0,y0);
+      if(marqueur ->orientation == deplacement)
 	puissance_poussee ++; // Animal donne du puissance
-      if(marquer -> orientation == orientation_inverser(deplacement))
+      if(marqueur -> orientation == orientation_inverser(deplacement))
 	puissance_poussee --; // Animal resiste
 
       coordonnees_appliquer_deplacement(&x0,&y0,deplacement);
     }
-  if(puissance > 0)
+  if(puissance_poussee > 0)
     return 1;
 
   else 
@@ -51,25 +56,30 @@ void poussee_realiser (plateau_siam* plateau,
 {
   //Conditions:
   assert (plateau!=NULL);
-  assert (coordoonees_etre_dans_plateau(x,y)== 1);
+  assert (coordonnees_etre_dans_plateau(x,y)== 1);
   assert (orientation_etre_integre_deplacement(deplacement) ==1);
 
   assert(poussee_etre_valide(plateau,x,y,deplacement));
 
   // Les modification:
 
-  const piece_siam* this = NULL;
+  piece_siam* this = NULL, *next = NULL;
   int x0=x,y0=y;
   int x1=x,y1=y;
 
-  if(coordonnees_etre_dans_plateau(x0,y0)==1 && plateau_exister_piece(x0,y0) )
+if(coordonnees_etre_dans_plateau(x0,y0)==1 && plateau_exister_piece(plateau,x0,y0) )
     {
-      cooordonnes_appliquer_deplacement(&x1,&y1,deplacement);
-      pousse_realiser(plateau,x1,y1,animal,deplacement,condition_victoire);
+      coordonnees_appliquer_deplacement(&x1,&y1,deplacement);
+      poussee_realiser(plateau,x1,y1,animal,deplacement,condition_victoire);
       
-      this = piece_obtenir_info(plateau,x0,y0);
-      plateau_modification_piece(plateau,x0,y0,deplacement,this->orientation, condition_victoire );
+      this = plateau_obtenir_piece(plateau,x0,y0);
       
+      if ( coordonnees_etre_dans_plateau(x1,y1)==1) // Si on  reste dans le plateau on bouge
+	{
+	  next = plateau_obtenir_piece(plateau,x0,y0);
+	  piece_definir(next,this->type,this->orientation);
+	}
+      piece_definir_case_vide(this); // dans tout les cas , on bouge.
       
     }
 

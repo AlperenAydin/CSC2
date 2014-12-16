@@ -16,19 +16,25 @@ coup_jeu api_siam_tenter_introduire_nouvelle_piece_si_possible(jeu_siam* jeu,
  
   int Valid=1;
 
-  const piece_siam* piece = plateau_obtenir_piece_info(&jeu->plateau,x,y);
   type_piece piece_du_joueur = joueur_obtenir_animal (jeu->joueur);
 
   if(coordonnees_etre_dans_plateau(x,y)==0)//On vérifie que les coordonées sont valides
     {
+      puts("Coordonnees pas le plateau");
       Valid=0;
     }  
   
-  if(plateau_exister_piece(&(jeu->plateau),x,y)==0){Valid=0;} //On vérifie que la pièce existe sur ce plateau
+  if(plateau_exister_piece(&(jeu->plateau),x,y)==1)
+    {
+      puts("Il ya deja quelque chose");
+      Valid=0;
+    } //On vérifie que la pièce existe sur ce plateau
   
-  if(joueur_etre_type_animal(jeu->joueur,piece->type)==0){Valid=0;}//On vérifie que le type du joueur correspond bien au type de la pièce
-    
-  if (plateau_modification_introduire_piece_etre_possible(&(jeu->plateau),x,y,piece_du_joueur,orientation)==1){Valid =0;}
+  if (plateau_modification_introduire_piece_etre_possible(&(jeu->plateau),x,y,piece_du_joueur,orientation)==0)
+    {
+      puts("modifcation pas possible");
+      Valid =0;
+    }
 
   if(Valid==1)
     {
@@ -71,11 +77,20 @@ coup_jeu api_siam_tenter_deplacer_piece_si_possible(jeu_siam* jeu,
       Valid=0;
     }  
   
-  if(plateau_exister_piece(&(jeu->plateau),x,y)==0){Valid=0;} //On vérifie que la pièce existe sur ce plateau
+  if(plateau_exister_piece(&(jeu->plateau),x,y)==0)
+    {
+      Valid=0;
+    } //On vérifie que la pièce existe sur ce plateau
   
-  if(joueur_etre_type_animal(jeu->joueur,piece->type)==0){Valid=0;}//On vérifie que le type du joueur correspond bien au type de la pièce
+  if(joueur_etre_type_animal(jeu->joueur,piece->type)==0)
+    {
+      Valid=0;
+    }//On vérifie que le type du joueur correspond bien au type de la pièce
     
-  if (plateau_modification_deplacer_piece_etre_possible(&(jeu->plateau),x,y,deplacement,orientation)==1){Valid =0;}
+  if (plateau_modification_deplacer_piece_etre_possible(&(jeu->plateau),x,y,deplacement,orientation)==0)
+    {
+      Valid =0;
+    }
 
   if(Valid==1)
     {
@@ -112,14 +127,15 @@ coup_jeu api_siam_tenter_changer_orientation_piece_si_possible(jeu_siam* jeu,int
 
   if(coordonnees_etre_dans_plateau(x,y)==0)//On vérifie que les coordonées sont valides
     {
+      puts("1");
       Valid=0;
     }  
+ 
+  if(plateau_exister_piece(&(jeu->plateau),x,y)==0){puts("2");Valid=0;} //On vérifie que la pièce existe sur ce plateau
   
-  if(plateau_exister_piece(&(jeu->plateau),x,y)==0){Valid=0;} //On vérifie que la pièce existe sur ce plateau
-  
-  if(joueur_etre_type_animal(jeu->joueur,piece->type)==0){Valid=0;}//On vérifie que le type du joueur correspond bien au type de la pièce
+  else if(joueur_etre_type_animal(jeu->joueur,piece->type)==0){puts("3");Valid=0;}//On vérifie que le type du joueur correspond bien au type de la pièce
     
-  if (plateau_modification_changer_orientation_piece_etre_possible(&(jeu->plateau),x,y,orientation)==1){Valid =0;}
+  if (plateau_modification_changer_orientation_piece_etre_possible(&(jeu->plateau),x,y,orientation)==0){puts("4");Valid =0;}
 
   if(Valid==1)
     {
