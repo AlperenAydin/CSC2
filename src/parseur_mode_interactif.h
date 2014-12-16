@@ -88,9 +88,31 @@ typedef struct
 /**
  *Fonction action_initialiser:
  *****************************
- * Initialiser une action a des valeurs 
+ * Initialiser une action a des valeurs qui correspond a une actions nulle
+ * 
+ *  Necessite: 
+ *    - Une pointeur action non NULL
+ *  Garantie:
+ *    
  **/
 void action_initialiser(action_a_realiser* action_a_initialiser);
+
+
+/**
+ *Fonction ligne_de_commande_parser:
+ ***********************************
+ *  Parse la chaine de caractere passe en parametre et donne une action qui 
+ *  correspond a la commande telles qui sont definie dans mode_interactif.
+ *  L'action est initialise au debut. 
+ *  Si on a une chaine NULL ou la commande correspond aucune action,
+ *  on retourne l'action initialisee.
+ * 
+ *  Necessite: 
+ *    - Une pointeur action non NULL
+ *    - Une chaine de caractere   
+ *  Garantie:
+ *    
+ **/
 void ligne_de_commande_parser(const char* ligne_commande,action_a_realiser* action_demandee);
 
 
