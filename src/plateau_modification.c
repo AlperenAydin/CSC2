@@ -24,11 +24,11 @@ int plateau_modification_introduire_piece_etre_possible(const plateau_siam* plat
   //  Sinon renvoie 0
 
   if(coordonnees_etre_dans_plateau(x,y)==0)
-    return 0;
+      return 0;
   if(orientation_etre_integre_deplacement(orientation)==0)
-    return 0;
+      return 0;
   if(plateau_exister_piece(plateau,x,y)==1)
-    return 0;
+      return 0;
 
   //verification de condition; 
   return 1;
@@ -46,10 +46,10 @@ void plateau_modification_introduire_piece(plateau_siam* plateau,
   //preconditions
   assert(plateau!=NULL);
   assert(coordonnees_etre_dans_plateau(x,y));
-  assert(plateau_exister_piece(plateau,x,y)==1);
+  assert(plateau_exister_piece(plateau,x,y)==0);
   assert(orientation_etre_integre_deplacement(orientation));
 
-  assert(plateau_modification_introduire_piece_etre_possible(plateau,x,y,type,orientation));
+  assert(plateau_modification_introduire_piece_etre_possible(plateau,x,y,type,orientation)==1);
 
   //changement d'orientation
   piece_siam* piece  = plateau_obtenir_piece(plateau,x,y);
@@ -85,16 +85,16 @@ int plateau_modification_changer_orientation_piece_etre_possible(plateau_siam* p
   //
 
   if(coordonnees_etre_dans_plateau(x0,y0)==0)
-    return 0;
+    {puts("1");return 0;}
   if(orientation_etre_integre_deplacement(orientation)==0)
-    return 0;
+    {puts("2");return 0;}
   if(plateau_exister_piece(plateau,x0,y0)==0)
-    return 0;
+    {puts("3");return 0;}
 
   //verification orientation differente
   const piece_siam* piece=plateau_obtenir_piece_info(plateau,x0,y0);
   if(piece->orientation==orientation)
-    return 0;
+    {puts("4");return 0; }
 
   return 1;
 }
@@ -135,7 +135,6 @@ int plateau_modification_deplacer_piece_etre_possible(const plateau_siam* platea
   //    * Coordonnees doivent etre dans le plateau
   //    * Coordonnees doivent designer un animal
   //    * L'orientation doit etre un deplacement
-  //    * On ne peut pas se mettre sur un cas ou il ya deja quelque chose.
   //  Sinon renvoie 0
   if (coordonnees_etre_dans_plateau(x0,y0)==0)
     return 0;
@@ -147,18 +146,11 @@ int plateau_modification_deplacer_piece_etre_possible(const plateau_siam* platea
   const piece_siam* piece =  plateau_obtenir_piece_info (plateau,x0,y0);
   if (piece_etre_animal (piece) ==0)
     return 0;
-
-  //Deplacement vers case vide:
-
+  //Verification qu'on est bouge pas sur un autre piece: 
   int x=x0, y=y0;
   coordonnees_appliquer_deplacement(&x,&y,direction_deplacement);
-
-  if(coordonnees_etre_dans_plateau(x,y)==1)// On est dans le plateau
-    {
-      if(plateau_exister_piece(plateau,x,y)==1)//On essaye de deplcer sur un autre piece (!=case_vide)
-	return 0;
-    }
-
+  if(plateau_exister_piece(plateau,x,y)==0)
+    return 0;
 
   //on est tout bon
 
@@ -199,7 +191,6 @@ void plateau_modification_deplacer_piece(plateau_siam* plateau,
   /*Pour le moment on touche pas le condition victoire*/
 
   //Post conditions
-  assert(piece_etre_animal(piece));
   assert(plateau_etre_integre(plateau));
     
 }

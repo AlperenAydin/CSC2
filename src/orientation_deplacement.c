@@ -123,25 +123,21 @@ int orientation_caractere_etre_integre(char orientation)
 orientation_deplacement orientation_correspondre_caractere(char orientation)
 {
   assert (orientation_caractere_etre_integre( orientation));
- 
-  orientation_deplacement deplacement = haut;
 
   switch (orientation)
     {
     case '<': 
-      deplacement = gauche;
-
+      return  gauche;
     case '>': 
-      deplacement = droite;
-
+      return droite;
     case '^': 
-      deplacement = haut;
+      return haut;
     case 'v': 
-      deplacement = bas;
+      return bas;
       
     }
  
-  return deplacement;
+  return aucune_orientation;
 }
 
 /***********************************************************************************

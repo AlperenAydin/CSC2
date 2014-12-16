@@ -21,11 +21,7 @@ void test_lancer()
 
 int main()
 {
-  plateau_siam plateau;
-  piece_siam p;
-  piece_definir(&p,elephant,haut);
-  plateau.piece[3][1]=p;
-  puts("piece aux coordonnees (x,y)=(3,1):");
-  piece_afficher(&(plateau.piece[3][1]));
-  return 1; 
+  mode_interactif_lancer();
+  return 1;
+  
 }

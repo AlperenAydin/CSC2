@@ -85,7 +85,11 @@ typedef struct
 
 }action_a_realiser;
 
-
+/**
+ *Fonction action_initialiser:
+ *****************************
+ * Initialiser une action a des valeurs 
+ **/
 void action_initialiser(action_a_realiser* action_a_initialiser);
 void ligne_de_commande_parser(const char* ligne_commande,action_a_realiser* action_demandee);
 
