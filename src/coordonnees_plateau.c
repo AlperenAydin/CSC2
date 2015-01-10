@@ -13,7 +13,11 @@ int coordonnees_etre_dans_plateau(int x,int y)
 
 int coordonnees_etre_bordure_plateau(int x,int y)
 {
-    return 1; //coder cette fonction
+  if (x == 0 || x == 4 )
+    return 1;
+  if (y == 0 || y == 4 )
+    return 1;
+  return 0;
 }
 
 void coordonnees_appliquer_deplacement(int* x,int* y,orientation_deplacement orientation)

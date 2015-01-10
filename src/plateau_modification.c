@@ -19,12 +19,15 @@ int plateau_modification_introduire_piece_etre_possible(const plateau_siam* plat
   //
   //  Verification conditions necessaires:
   //    * Coordonnees doivent etre dans le plateau
+  //    * On peut introduire que au bords
   //    * Coordonnees doivent designer une case vide
   //    * L'orientation doit etre un deplacement
   //  Sinon renvoie 0
 
   if(coordonnees_etre_dans_plateau(x,y)==0)
       return 0;
+  if (coordonnees_etre_bordure_plateau(x,y)==0)
+    return 0;
   if(orientation_etre_integre_deplacement(orientation)==0)
       return 0;
   if(plateau_exister_piece(plateau,x,y)==1)
