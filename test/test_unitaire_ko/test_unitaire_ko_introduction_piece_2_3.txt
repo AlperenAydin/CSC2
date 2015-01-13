@@ -1,0 +1,10 @@
+# test_unitaire_ko_introduction_piece_2_3.txt
+# 
+#Tenter d'introduire piece a (2,3) 
+
+> i 
+> n 2 3 ^ 
+> fin 
+
+#comportement attendu: 
+#Le piece n'est pas introduit a (2,3) avec ^

@@ -1,0 +1,8 @@
+# test_unitaire_ok_introduction_piece_1_0.txt
+# 
+#Tenter d'introduire piece a (1,0) 
+i 
+n 1 0 v 
+fin 
+#comportement attendu: 
+#introduction du piece a (1,0) avec v
