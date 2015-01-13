@@ -1,7 +1,7 @@
 #Test_Unitaire_Déplacementko1
 #
 #Teste qu'il est impossible de déplacer une pièce en dehors du plateau de jeu
-> lit 'Initialisation_Test_Déplacement1.txt'
-> d 0 -1 >
-> fin
+lit 'Initialisation_Test_Déplacement1.txt'
+d 0 -1 >
+fin
 #Comportement Attendu: Le coup doit être invalide il est impossible de déplacer une pièce en dehors du jeu

@@ -1,7 +1,7 @@
 #Test_Unitaire_ChangementDirection_ko
 #
 #Teste qu'il est impossible de changer l'orientation d'une pièce pour la meme orientation
-> lit 'Initialisation_Test_ChangementDirection1.txt'
-> o 0 0 >
-> fin
+ lit 'Initialisation_Test_ChangementDirection1.txt'
+ o 0 0 >
+ fin
 #Comportement Attendu: Le coup doit être invalide il est impossible de changer l'orientation d'une pièce pour la meme orientation

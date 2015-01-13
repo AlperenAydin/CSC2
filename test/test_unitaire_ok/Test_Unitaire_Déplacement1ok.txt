@@ -2,8 +2,8 @@
 #
 #Teste qu'il est impossible de déplacer une pièce dans une case limitrophe
 
-> lit 'Initialisation_Test_Déplacement1.txt'
-> d 1 0 >
-> fin
+lit 'Initialisation_Test_Déplacement1.txt'
+d 1 0 >
+fin
 
 #Comportement Attendu: Le coup doit être valide il est possible de déplacer une pièce dans une case limitrophe

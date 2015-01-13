@@ -1,7 +1,7 @@
 #Test_Unitaire_DéplacementAvecPousee_ko
 #
 #Teste qu'il est impossible de pousé une pièce si les deux orientations sont "face à face"
-> lit 'Initialisation_Test_DéplacementAvecPousée.txt'
-> d 1 0 >
-> fin
+lit 'Initialisation_Test_DéplacementAvecPousée.txt'
+d 1 0 >
+fin
 #Comportement Attendu: Le coup doit être invalide il est impossible de déplacer une pièce en poussant une seconde si les orientations sont "face à face"
