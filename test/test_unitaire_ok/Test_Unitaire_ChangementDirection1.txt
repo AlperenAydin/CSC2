@@ -1,0 +1,7 @@
+#Test_Unitaire_ChangementDirection_ok
+#
+#Teste qu'il est possible de changer l'orientation d'une pièce u face"
+> lit 'Initialisation_Test_ChangementDirection1.txt'
+> o 0 0 ^
+> fin
+#Comportement Attendu: Le coup doit être valide il est possible de changer l'orientation d'une pièce pour une autre orientation

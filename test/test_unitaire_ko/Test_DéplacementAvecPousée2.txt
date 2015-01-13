@@ -1,0 +1,3 @@
+> lit 'Initialisation_Test_DéplacementAvecPousée.txt'
+> d 1 0 >
+> fin

@@ -1,0 +1,7 @@
+#Test_Unitaire_Déplacementko1
+#
+#Teste qu'il est impossible de déplacer un pièce en diagonale
+> lit 'Initialisation_Test_Déplacement1.txt'
+> d 1 1 >
+> fin
+#Comportement Attendu: Le coup doit être invalide il est impossible de déplacer une pièce en diagonale
