@@ -225,7 +225,7 @@ void piece_afficher_nom_cours(const piece_siam* piece);
 /**
  * Fonction : piece_correspondre_nom_cours
  * ***************************************
- *       Cree une piece decrit par un 
+ *       Cree une piece decrit par un nom_cours
  *
  *
  *    Necessite:
@@ -234,6 +234,7 @@ void piece_afficher_nom_cours(const piece_siam* piece);
  *      - Piece doit etre integre
  */
 piece_siam piece_correspondre_nom_cours(const char* nom_cours);
+
 
 
 /************************************************************************
