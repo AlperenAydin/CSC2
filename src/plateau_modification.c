@@ -152,7 +152,7 @@ int plateau_modification_deplacer_piece_etre_possible(const plateau_siam* platea
   //Verification qu'on est bouge pas sur un autre piece: 
   int x=x0, y=y0;
   coordonnees_appliquer_deplacement(&x,&y,direction_deplacement);
-  if(plateau_exister_piece(plateau,x,y)==0)
+  if(plateau_exister_piece(plateau,x,y)==1)
     return 0;
 
   //on est tout bon
@@ -174,8 +174,7 @@ void plateau_modification_deplacer_piece(plateau_siam* plateau,
   assert(orientation_etre_integre_deplacement(orientation_final));
   assert(orientation_etre_integre_deplacement(direction_deplacement));
 
-  assert(plateau_modification_deplacer_piece_etre_possible(plateau,x0,y0,direction_deplacement,orientation_final) 
-	 &&poussee_etre_valide(plateau,x0,y0,direction_deplacement));
+  assert(plateau_modification_deplacer_piece_etre_possible(plateau,x0,y0,direction_deplacement,orientation_final) );
 
   //changement d'orientation
   piece_siam* piece  = plateau_obtenir_piece(plateau,x0,y0);
