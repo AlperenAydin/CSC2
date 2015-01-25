@@ -49,6 +49,8 @@
 #define MODE_INTERACTIF_H
 
 #include "jeu_siam.h"
+#include "joueur.h"
+
 
 
 /**

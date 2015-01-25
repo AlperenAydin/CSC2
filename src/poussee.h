@@ -52,6 +52,6 @@ void poussee_realiser (plateau_siam* plateau,
 		       int y,
 		       type_piece animal,
 		       orientation_deplacement deplacement,
-		       condition_victoire_partie condition_victoire);
+		       condition_victoire_partie* condition_victoire);
 
 #endif
