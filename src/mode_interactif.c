@@ -15,70 +15,78 @@
 void mode_interactif_lancer()
 {
 
-    puts("\n***********************");
-    puts("Jeu SIAM mode interactif:");
-    puts("***********************");
-    puts("Commandes:");
-    puts("> #                 : Commentaires, tout ce qui suit # n'est pas analyse.");
-    puts("> i                 : [I]nitialisation du jeu.");
-    puts("> n x0 y0 dir       : [N]ouvelle piece introduite en (x0,y0) avec direction indiquee.");
-    puts("> d x0 y0 dir0 dir1 : [D]eplacement piece de (x0,y0) dans le sens dir0 indique");
-    puts("                         et ayant la direction dir1 a l'arrive.");
-    puts("> o x0 y0 dir       : [O]rientation nouvelle de la piece en (x0,y0).");
-    puts("> lit [NOM_FICHIER] : Lire un fichier externe.");
-    puts("");
-    puts("directions possibles: gauche <, droite >, haut ^, bas v.");
-    printf("***********************\n\n");
-    fflush(stdout);
+  puts("\n***********************");
+  puts("Jeu SIAM mode interactif:");
+  puts("***********************");
+  puts("Commandes:");
+  puts("> #                 : Commentaires, tout ce qui suit # n'est pas analyse.");
+  puts("> i                 : [I]nitialisation du jeu.");
+  puts("> n x0 y0 dir       : [N]ouvelle piece introduite en (x0,y0) avec direction indiquee.");
+  puts("> d x0 y0 dir0 dir1 : [D]eplacement piece de (x0,y0) dans le sens dir0 indique");
+  puts("                         et ayant la direction dir1 a l'arrive.");
+  puts("> o x0 y0 dir       : [O]rientation nouvelle de la piece en (x0,y0).");
+  puts("> lit [NOM_FICHIER] : Lire un fichier externe.");
+  puts("");
+  puts("directions possibles: gauche <, droite >, haut ^, bas v.");
+  printf("***********************\n\n");
+  fflush(stdout);
 
 
 
-    int victoire=0;
-    jeu_siam jeu;
-    jeu_initialiser(&jeu);
+  int victoire=0;
+  jeu_siam jeu;
+  jeu_initialiser(&jeu);
 
-    action_a_realiser action;
-    action_initialiser(&action);
+  action_a_realiser action;
+  action_initialiser(&action);
 
-    mode_interactif_sauvegarder_jeu_fichier(&jeu);
+  mode_interactif_sauvegarder_jeu_fichier(&jeu);
 
-    char buffer_ligne_commande[MAX_NOM_FICHIER_TAILLE];
+  char buffer_ligne_commande[MAX_NOM_FICHIER_TAILLE];
 
-    do
+  do
     {
-        puts("");fflush(stdout);
-        jeu_afficher(&jeu);
+      puts("");fflush(stdout);
+      jeu_afficher(&jeu);
 
-        printf("> ");
-        fflush(stdout);
+      printf("> ");
+      fflush(stdout);
 
-        fgets(buffer_ligne_commande,MAX_LIGNE_COMMANDE,stdin);
-        ligne_de_commande_parser(buffer_ligne_commande,&action);
-        switch(action.type_action)
+      fgets(buffer_ligne_commande,MAX_LIGNE_COMMANDE,stdin);
+      ligne_de_commande_parser(buffer_ligne_commande,&action);
+      switch(action.type_action)
         {
         case deplacement:
-            mode_interactif_deplacer_piece(&jeu,action.x_depart,action.y_depart,action.deplacement,action.orientation,&victoire);
-            break;
+	  mode_interactif_deplacer_piece(&jeu,action.x_depart,action.y_depart,action.deplacement,action.orientation,&victoire);
+	  joueur_changer(&jeu.joueur);
+	  break;
+
         case introduction:
-            mode_interactif_introduire_nouvelle_piece(&jeu,action.x_depart,action.y_depart,action.orientation,&victoire);
-            break;
+	  mode_interactif_introduire_nouvelle_piece(&jeu,action.x_depart,action.y_depart,action.orientation,&victoire);
+	  joueur_changer(&jeu.joueur);
+	  break;
+
         case changement_orientation:
-            mode_interactif_changer_orientation(&jeu,action.x_depart,action.y_depart,action.orientation);
-            break;
+	  mode_interactif_changer_orientation(&jeu,action.x_depart,action.y_depart,action.orientation);
+	  joueur_changer(&jeu.joueur);
+	  break;
+
         case lecture_fichier:
-            mode_interactif_lire_fichier(&jeu,action.filename);
-            break;
+	  mode_interactif_lire_fichier(&jeu,action.filename);
+	  break;
         case initialisation:
-            printf("Initialisation du jeu\n");fflush(stdout);
-            jeu_initialiser(&jeu);
-            mode_interactif_sauvegarder_jeu_fichier(&jeu);
-            break;
+	  printf("Initialisation du jeu\n");fflush(stdout);
+	  jeu_initialiser(&jeu);
+	  mode_interactif_sauvegarder_jeu_fichier(&jeu);
+	  break;
+
         case fin:
-            printf("Fin de la partie\n");fflush(stdout);
-            break;
+	  printf("Fin de la partie\n");fflush(stdout);
+	  break;
+
         default:
-            puts("\nLigne non valide, action non realisee\n");fflush(stdout);
-            break;
+	  puts("\nLigne non valide, action non realisee\n");fflush(stdout);
+	  break;
         }
 
     } while(action.type_action!=fin && victoire==0);

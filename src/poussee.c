@@ -59,22 +59,24 @@ void poussee_realiser (plateau_siam* plateau,
 		       int y,
 		       type_piece animal,
 		       orientation_deplacement deplacement,
-		       condition_victoire_partie condition_victoire)
+		       condition_victoire_partie* condition_victoire)
 {
   //Conditions:
   assert (plateau!=NULL);
   assert (coordonnees_etre_dans_plateau(x,y)== 1);
   assert (orientation_etre_integre_deplacement(deplacement) ==1);
-
+  assert (condition_victoire != NULL);
   
   assert(poussee_etre_valide(plateau,x,y,deplacement)==1);
 
   // Les modification:
 
-  piece_siam* this = NULL, *next = NULL;
-  int x0=x,y0=y;
-  int nb_pas = 0;
-
+  piece_siam* this = NULL, *next = NULL; // Pointeur qui seront utilise dans le deplacement
+  int x0=x,y0=y;                         // Coordonnees a utiliser  
+  
+  int nb_pas = 0;                        // Un competeur pour determiner le nombre de piece a deplacer
+  
+ 
   orientation_deplacement retour = orientation_inverser(deplacement);
 
   if(coordonnees_etre_dans_plateau(x0,y0)==1 && plateau_exister_piece(plateau,x0,y0) )
@@ -83,6 +85,7 @@ void poussee_realiser (plateau_siam* plateau,
       // On se met dans la derniere case dans le colonnes de poussee
       nb_pas++;
     }
+  // On va bouger vers l'arrierre
   while(nb_pas >=0 )
     {
       this = plateau_obtenir_piece(plateau,x0,y0);
