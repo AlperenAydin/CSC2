@@ -38,10 +38,17 @@ coup_jeu api_siam_tenter_introduire_nouvelle_piece_si_possible(jeu_siam* jeu,
 
   if(Valid==1)
     {
-      plateau_modification_introduire_piece(&(jeu->plateau),x,y,piece_du_joueur,orientation,NULL);
       coup_jeu coup;
       coup_jeu_initialiser(&coup);
       coup.valide = 1;
+
+      plateau_modification_introduire_piece(&(jeu->plateau)
+					    ,x
+					    ,y
+					    ,piece_du_joueur
+					    ,orientation
+					    ,&(coup.condition_victoire)
+					    );
       printf("Le coup est valide \n");
       return coup;
 
@@ -67,54 +74,84 @@ coup_jeu api_siam_tenter_deplacer_piece_si_possible(jeu_siam* jeu,
    
 
   assert(jeu!=NULL);
- 
-  int Valid=1;
-  int poussee = 0;
 
+  int valide  = 1;
+  int poussee = 0;
   const piece_siam* piece = plateau_obtenir_piece_info(&jeu->plateau,x,y);
 
-  if(coordonnees_etre_dans_plateau(x,y)==0)//On vérifie que les coordonées sont valides
+  if(coordonnees_etre_dans_plateau(x,y)==0)
+    // Le coordonnees doit etre dans le plateau
     {
-      Valid=0;
-    }  
-  
-  else if(plateau_exister_piece(&(jeu->plateau),x,y)==0)
+      printf("Coordonnees pas dans le plateau \n");
+      valide = 0;
+    }
+
+  else if (plateau_exister_piece(&jeu->plateau
+				 ,x,y)==0)
+    // Le coordonnees doit designer un piece 
     {
-      Valid=0;
-    } //On vérifie que la pièce existe sur ce plateau
-  
-  else if(joueur_etre_type_animal(jeu->joueur,piece->type)==0)
+      printf("Il y a une piece la bas \n");
+      valide =0;
+    }
+
+  else if (joueur_etre_type_animal(jeu->joueur
+				   ,piece->type) ==0 )
+    // La piece doit etre modifiable par le joueur
     {
-      Valid=0;
-    }//On vérifie que le type du joueur correspond bien au type de la pièce
-    
-  else if (plateau_modification_deplacer_piece_etre_possible(&(jeu->plateau),x,y,deplacement,orientation)==0) // Le deplacement n'est pas possible
+      printf("Ce n'est pas ton piece \n");
+      valide =0;
+    }
+
+  else if (plateau_modification_deplacer_piece_etre_possible(&jeu->plateau
+							     ,x
+							     ,y
+							     ,deplacement
+							     ,orientation)==0)
+    // Le deplacement n'est pas possible
     {
-      if (poussee_etre_valide (&(jeu->plateau),x,y,deplacement) ==1)
+      if (poussee_etre_valide(&jeu->plateau
+			       ,x
+			       ,y
+			       ,deplacement) == 1)
+	// Le deplacement n'est pas possible , mais le pousse l'est
 	{
+	  printf("On peut pousser \n");
 	  poussee = 1;
 	}
       else 
 	{
-	  Valid = 0;
+	  printf("On peut ni pousser ni deplacer \n");
+	  valide = 0;
 	}
     }
+    
 
-  if(Valid==1)
+  if(valide==1)
     {
-      if(poussee ==1)
-	{
-	  condition_victoire_partie condition_victoire;
-	  condition_victoire_initialiser (&condition_victoire);
-	  poussee_realiser(&(jeu->plateau),x,y,jeu->joueur,deplacement,condition_victoire);
-	}
-      else
-	{
-	  plateau_modification_deplacer_piece(&(jeu->plateau),x,y,deplacement,orientation,NULL);
-	}
       coup_jeu coup;
       coup_jeu_initialiser(&coup);
       coup.valide = 1;
+      if(poussee == 1)
+	{
+
+	  poussee_realiser(&jeu->plateau
+			   ,x
+			   ,y
+			   ,piece->type
+			   ,deplacement
+			   ,&(coup.condition_victoire));
+	}
+
+      else
+	{
+	plateau_modification_deplacer_piece(&(jeu->plateau)
+					    ,x
+					    ,y
+					    ,deplacement
+					    ,orientation
+					    ,&(coup.condition_victoire));
+      }
+
       printf("Le coup est valide \n");
       return coup;
 
