@@ -66,31 +66,43 @@ void poussee_realiser (plateau_siam* plateau,
   assert (coordonnees_etre_dans_plateau(x,y)== 1);
   assert (orientation_etre_integre_deplacement(deplacement) ==1);
 
-  assert(poussee_etre_valide(plateau,x,y,deplacement));
+  
+  assert(poussee_etre_valide(plateau,x,y,deplacement)==1);
 
   // Les modification:
 
   piece_siam* this = NULL, *next = NULL;
   int x0=x,y0=y;
-  int x1=x,y1=y;
+  int nb_pas = 0;
+
+  orientation_deplacement retour = orientation_inverser(deplacement);
 
   if(coordonnees_etre_dans_plateau(x0,y0)==1 && plateau_exister_piece(plateau,x0,y0) )
     {
-      coordonnees_appliquer_deplacement(&x1,&y1,deplacement);
-      poussee_realiser(plateau,x1,y1,animal,deplacement,condition_victoire);
-      
-      this = plateau_obtenir_piece(plateau,x0,y0);
-      
-      if ( coordonnees_etre_dans_plateau(x1,y1)==1) // Si on  reste dans le plateau on bouge
-	{
-	  next = plateau_obtenir_piece(plateau,x0,y0);
-	  piece_definir(next,this->type,this->orientation);
-	}
-      piece_definir_case_vide(this); // dans tout les cas , on bouge.
-      
+      coordonnees_appliquer_deplacement(&x0,&y0,deplacement); 
+      // On se met dans la derniere case dans le colonnes de poussee
+      nb_pas++;
     }
+  while(nb_pas >=0 )
+    {
+      this = plateau_obtenir_piece(plateau,x0,y0);
 
-  
+      int x1 =x0, y1 =y0;
+      coordonnees_appliquer_deplacement(&x1,&y1,deplacement);
+ 
+      if ( coordonnees_etre_dans_plateau(x1,y1)==1) 
+	// Si on  reste dans le plateau, on bouge
+    	{
+    	  next = plateau_obtenir_piece(plateau,x1,y1);
+    	  piece_definir(next,this->type,this->orientation);
+    	}
+
+      // dans tout les cas , on vide.
+      piece_definir_case_vide(this);
+
+      coordonnees_appliquer_deplacement(&x0,&y0,retour);// On retourne vers l'arriere
+      nb_pas--;
+    }
 
   //Post-conditions
   assert(plateau_etre_integre(plateau)==1);
