@@ -2,7 +2,7 @@
 # 
 #Tenter d'introduire piece a (0,1) 
 i 
-n 0 1 v 
+n 0 1 > 
 fin 
 #comportement attendu: 
-#introduction du piece a (0,1) avec v
+#introduction du piece a (0,1) avec >

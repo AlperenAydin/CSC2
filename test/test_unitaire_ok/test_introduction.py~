@@ -42,7 +42,7 @@ def sortie_introduction(x,y,orientation):
         sortie = sortie + "\n"
 
 
-    filename = 'sortie_unitaire_ok_introduction_piece_%d_%d.txt'%(x,y)
+    filename = 'test_unitaire_ok_introduction_piece_%d_%d_sortie.txt'%(x,y)
     fo = open( filename,"w")
     fo.write(sortie)
     

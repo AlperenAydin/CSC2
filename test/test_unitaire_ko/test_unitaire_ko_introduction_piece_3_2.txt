@@ -3,8 +3,8 @@
 #Tenter d'introduire piece a (3,2) 
 
 > i 
-> n 3 2 < 
+> n 3 2 v 
 > fin 
 
 #comportement attendu: 
-#Le piece n'est pas introduit a (3,2) avec <
+#Le piece n'est pas introduit a (3,2) avec v

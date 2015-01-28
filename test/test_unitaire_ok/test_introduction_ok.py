@@ -15,7 +15,6 @@ def creer_fichier(x,y,orientation):
     commande    = introduction_nouvelle_piece(x,y,orientation)
     description = "# " +filename +"\n# \n"+ "#Tenter d'introduire piece a (%d,%d) \n"%(x,y)
     attendu     = "#comportement attendu: \n"+ "#introduction du piece a (%d,%d) avec %s"%(x,y,orientation) 
-
     fo.write( description
               +"i \n"
               +commande
@@ -25,7 +24,7 @@ def creer_fichier(x,y,orientation):
 def sortie_introduction(x,y,orientation):
     sortie = "joueur 0 (elephant) \n"
     rocher= [(1,2),(2,2),(3,2)];
-
+    
     l = range(0,5)
     list.reverse(l)
 
@@ -40,11 +39,13 @@ def sortie_introduction(x,y,orientation):
                 addition = " RRR |"
             sortie = sortie +addition;
         sortie = sortie + "\n"
+    sortie = sortie+ "    [0]   [1]   [2]   [3]   [4]" + "\n"
 
 
     filename = 'test_unitaire_ok_introduction_piece_%d_%d_sortie.txt'%(x,y)
     fo = open( filename,"w")
     fo.write(sortie)
+    fo.write("\n")
     
                 
                 

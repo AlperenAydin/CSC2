@@ -2,7 +2,7 @@
 # 
 #Tenter d'introduire piece a (1,4) 
 i 
-n 1 4 < 
+n 1 4 v 
 fin 
 #comportement attendu: 
-#introduction du piece a (1,4) avec <
+#introduction du piece a (1,4) avec v
